@@ -1,6 +1,17 @@
 <?php
 
 class Employee {
+    private static $roles = ['intern', 'secretary', 'clerk', 'manager'];
+    private static $genders = ['m', 'f'];
+
+    public static function getRoles() {
+        return self::$roles;
+    }
+
+    public static function getGenders() {
+        return self::$genders;
+    }
+
     protected $id;
     protected $surname;
     protected $name;
@@ -17,6 +28,18 @@ class Employee {
         $this->birthdate = $birthdate;
         $this->role = $role;
         $this->salary = $salary;
+    }
+
+    public function getProps() {
+        return get_object_vars($this);
+    }
+
+    public function setRole($newRole){
+        $this->role = $newRole;
+    }
+
+    public function setGender($newSalary){
+        $this->salary = $newSalary;
     }
 }
 
@@ -41,6 +64,7 @@ class Company {
     private $address;
     private $phoneNumber;
     private $hrStock = [];
+    private $Errors = [];
 
     public function __construct($name, $fiscalCode, $address, $phoneNumber, $employees) {
         $this->name = $name;
@@ -48,12 +72,26 @@ class Company {
         $this->address = $address;
         $this->phoneNumber = $phoneNumber;
         foreach($employees as $key => $employee) {
-            $this->hrStock[] = $employee[4] === 'manager' ? 
-                                new Manager($key, ...$employee) : new Employee($key, ... $employee);
+            try {
+                $this->add_employee($key, $employee);
+            } catch (Exception $e) {
+                $this->errors[] = $e->getMessage();
+            }
+
         }
     }
 
-    public function getHrStock() {
-        return $this->hrStock;
+    public function getProps() {
+        return get_object_vars($this);
+    }
+    
+    public function add_employee($id, $array_props) {
+        if (!in_array($array_props[2], Employee::getGenders()) || 
+            !in_array($array_props[4], Employee::getRoles())) {
+                throw new Exception('The element ' . $id . ' cannot be added as new employee or manager for a error; please check the data');
+            }
+
+        $this->hrStock[] =$array_props[4] === 'manager' ? 
+            new Manager($id, ...$array_props) : new Employee($id, ... $array_props);
     }
 }
