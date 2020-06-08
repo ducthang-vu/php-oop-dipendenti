@@ -52,10 +52,7 @@
                 <?php } ?>
             </ul>
         </section>
-
     </main>
 
-    <!-- SCRIPT -->
-    <script src="script/main.js"></script>
 </body>
 </html> 
