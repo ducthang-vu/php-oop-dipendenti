@@ -1,7 +1,7 @@
 <?php
 
 class Employee {
-    private static $roles = ['intern', 'secretary', 'clerk', 'manager'];
+    private static $roles = ['intern', 'secretary', 'clerk', 'manager', 'accountant'];
     private static $genders = ['m', 'f'];
 
     public static function getRoles() {
@@ -88,7 +88,7 @@ class Company {
     public function add_employee($id, $array_props) {
         if (!in_array($array_props[2], Employee::getGenders()) || 
             !in_array($array_props[4], Employee::getRoles())) {
-                throw new Exception('The element ' . $id . ' cannot be added as new employee or manager for a error; please check the data');
+                throw new Exception('The element ' . $id . ' cannot be added as new employee or manager for a error; please check the data.');
             }
 
         $this->hrStock[] =$array_props[4] === 'manager' ? 
