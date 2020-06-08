@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?php echo __DIR__ . '/css/main.css' ?>">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <header>
