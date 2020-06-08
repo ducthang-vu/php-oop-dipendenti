@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <div class="container">
+        <div class="container text-center">
             <h1><?php echo $myCompany->getProps()['name'] ?></h1>
             <p>Fiscal code: <?php echo $myCompany->getProps()['fiscalCode'] ?></p>
             <p>Address: <?php echo $myCompany->getProps()['address'] ?></p>
