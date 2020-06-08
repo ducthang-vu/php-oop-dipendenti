@@ -21,6 +21,9 @@ class Employee {
     protected $salary;
 
     public function __construct($id, $surname, $name, $gender, $birthdate, $role, $salary) {
+        if (!in_array($gender, Employee::getGenders()) || !in_array($role, Employee::getRoles())) {
+            throw new Exception('The element ' . $id . ' cannot be added as new employee or manager  for a error; please check the data.');
+        }
         $this->id = $id;
         $this->surname= $surname;
         $this->name = $name;
@@ -86,11 +89,6 @@ class Company {
     }
     
     public function add_employee($id, $array_props) {
-        if (!in_array($array_props[2], Employee::getGenders()) || 
-            !in_array($array_props[4], Employee::getRoles())) {
-                throw new Exception('The element ' . $id . ' cannot be added as new employee or manager for a error; please check the data.');
-            }
-
         $this->hrStock[] =$array_props[4] === 'manager' ? 
             new Manager($id, ...$array_props) : new Employee($id, ... $array_props);
     }
