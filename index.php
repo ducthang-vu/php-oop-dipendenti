@@ -1,3 +1,5 @@
+<?php include_once './partials/script.php' ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
